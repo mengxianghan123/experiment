@@ -1,0 +1,3 @@
+*.ckpt
+log
+__pycache__
