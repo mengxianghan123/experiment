@@ -1,0 +1,15 @@
+result for class carpet --- mean: 0.601   std: 0.012
+result for class grid --- mean: 1.000   std: 0.000
+result for class leather --- mean: 0.981   std: 0.016
+result for class tile --- mean: 0.889   std: 0.020
+result for class wood --- mean: 0.993   std: 0.006
+result for class bottle --- mean: 0.991   std: 0.006
+result for class cable --- mean: 0.932   std: 0.013
+result for class capsule --- mean: 0.702   std: 0.037
+result for class hazelnut --- mean: 0.867   std: 0.112
+result for class metal_nut --- mean: 0.810   std: 0.024
+result for class pill --- mean: 0.838   std: 0.049
+result for class screw --- mean: 0.620   std: 0.012
+result for class toothbrush --- mean: 0.951   std: 0.013
+result for class transistor --- mean: 0.921   std: 0.024
+result for class zipper --- mean: 0.998   std: 0.002
