@@ -38,3 +38,6 @@ result for class capsule --- mean: 0.876   std: 0.000
 result for class screw --- mean: 0.713   std: 0.000
 result for class hazelnut --- mean: 0.846   std: 0.000
 result for class carpet --- mean: 0.343   std: 0.000
+result for class carpet --- mean: 0.327   std: 0.000
+
+std:

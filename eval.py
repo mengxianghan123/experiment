@@ -12,7 +12,7 @@ from cutpaste import CPmodel, data
 
 def eval(data_path, data_cls, batch_size, ckpt_path=None, gpu=None, model=None):
 
-    torch.cuda.set_device(gpu)
+    device = torch.device('cuda:{:d}'.format(gpu))
 
     train_dataset = data.Dataset(data_path, data_cls, "test", "train_data_noaug")
     test_dataset = data.Dataset(data_path, data_cls, "test", "test_data_noaug")
@@ -28,14 +28,14 @@ def eval(data_path, data_cls, batch_size, ckpt_path=None, gpu=None, model=None):
             name = k[7:]
             new_state_dict[name] = v
         model.load_state_dict(new_state_dict)
-    model.to("cuda")
+    model.to(device)
 
     print("computing embeddings of training and testing images...")
     model.eval()
     train_embedding = list()
     with torch.no_grad():
         for input in train_dataloader:
-            input = input.to("cuda")
+            input = input.to(device)
             embed, _ = model(input)
             train_embedding.append(embed)
         train_embedding = torch.cat(train_embedding, 0).to("cpu")  # too big to store on gpu
@@ -44,7 +44,7 @@ def eval(data_path, data_cls, batch_size, ckpt_path=None, gpu=None, model=None):
     test_label = list()
     with torch.no_grad():
         for input, label in test_dataloader:
-            input = input.to("cuda")
+            input = input.to(device)
             embed, _ = model(input)
             test_embedding.append(embed)
             test_label.append(label)

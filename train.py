@@ -32,11 +32,14 @@ parser.add_argument("--pretrained", default=False, action="store_true")
 parser.add_argument("--epochs", default=2, type=int)
 parser.add_argument("--lr", default=0.03, type=int)
 parser.add_argument("--test-interval", default=10, type=int)
+parser.add_argument("--device", default=0, type=int)
 args = parser.parse_args()
 print(args)
 
 
 def train(args):
+
+    device = torch.device('cuda:{:d}'.format(args.device))
 
     # dist.init_process_group(backend="nccl")
     writer = SummaryWriter("log/{}".format(args.cls))
@@ -45,13 +48,13 @@ def train(args):
     # data_sampler = torch.utils.data.distributed.DistributedSampler(dataset)
 
     model = CPmodel.Model(args.model_name, args.aug_mode, args.pretrained)
-    model.to("cuda")
+    model.to(device)
     # model = DDP(model, device_ids=[args.local_rank])
 
     optimizer = torch.optim.SGD(model.parameters(), lr=0.03, momentum=0.9, weight_decay=3e-5)
-    loss_func1 = nn.CrossEntropyLoss().to("cuda")
-    loss_func2 = nn.CrossEntropyLoss().to("cuda")
-    loss_func3 = nn.MSELoss().to("cuda")
+    loss_func1 = nn.CrossEntropyLoss().to(device)
+    loss_func2 = nn.CrossEntropyLoss().to(device)
+    loss_func3 = nn.MSELoss().to(device)
     result_list = []
 
     for epoch in range(args.epochs):
@@ -98,8 +101,8 @@ def train(args):
             y = torch.arange(num_cls)
             y = y.repeat_interleave(batchsize)
             m = torch.randperm(num_cls * batchsize)
-            input = stacking[m].to("cuda")
-            label = y[m].to("cuda")
+            input = stacking[m].to(device)
+            label = y[m].to(device)
 
             # input = torch.cat((cutpaste, ori_std, blank), 0)  # B C H W
             # for ind, i in enumerate(input):  # test code
@@ -144,7 +147,7 @@ def train(args):
             # writer.add_scalar("loss4", loss4, epoch)
 
         if epoch != 0 and (epoch % args.test_interval == 0 or epoch == args.epochs - 1):
-            roc_auc = eval(args.data, args.cls, args.batch_size, gpu=0, model=model)
+            roc_auc = eval(args.data, args.cls, args.batch_size, gpu=args.device, model=model)
             writer.add_scalar("roc_auc", roc_auc, epoch)
             print("epoch {} roc_auc {:3f}".format(epoch, roc_auc))
             result_list.append(roc_auc)

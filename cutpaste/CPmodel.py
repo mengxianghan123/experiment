@@ -33,10 +33,10 @@ class Model(nn.Module):
         # head2_list.append(nn.Linear(self.resnet.fc.weight.shape[1], 2))
         # self.head2 = nn.Sequential(*head2_list)
 
-        self.resnet.avgpool = nn.Identity()
+        # self.resnet.avgpool = nn.Identity()
         self.resnet.fc = nn.Identity()
-        self.resnet.flatten = nn.Identity()
-        self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
+        # self.resnet.flatten = nn.Identity()
+        # self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
 
         # self.upsample2 = nn.Upsample(scale_factor=2, mode="bilinear")
         # self.upsample4 = nn.Upsample(scale_factor=4, mode="bilinear")
@@ -52,9 +52,9 @@ class Model(nn.Module):
         # self.relu = nn.ReLU(inplace=True)
 
     def forward(self, x):
-        y = self.resnet(x)
-        embed = torch.flatten(self.avgpool(y), 1)
-        paste = self.head1(embed)
+        emb = self.resnet(x)
+        # embed = torch.flatten(self.avgpool(y), 1)
+        paste = self.head1(emb)
         # disorder = self.head2(embed)
 
         # y = self.upsample2(y)
@@ -81,4 +81,4 @@ class Model(nn.Module):
         # y = self.conv5(y)
 
         # return embed, paste, disorder, y
-        return embed, paste
+        return emb, paste
