@@ -13,3 +13,28 @@ result for class screw --- mean: 0.620   std: 0.012
 result for class toothbrush --- mean: 0.951   std: 0.013
 result for class transistor --- mean: 0.921   std: 0.024
 result for class zipper --- mean: 0.998   std: 0.002
+
+3-way:
+result for class carpet --- mean: 0.647   std: 0.038
+result for class grid --- mean: 0.997   std: 0.003
+result for class leather --- mean: 0.996   std: 0.000
+result for class tile --- mean: 0.889   std: 0.000
+result for class wood --- mean: 1.000   std: 0.000
+result for class bottle --- mean: 0.993   std: 0.000
+result for class cable --- mean: 0.906   std: 0.000
+result for class capsule --- mean: 0.829   std: 0.000
+result for class hazelnut --- mean: 0.820   std: 0.000
+result for class metal_nut --- mean: 0.848   std: 0.000
+result for class pill --- mean: 0.829   std: 0.000
+result for class screw --- mean: 0.427   std: 0.000
+result for class toothbrush --- mean: 0.994   std: 0.000
+result for class transistor --- mean: 0.907   std: 0.000
+result for class zipper --- mean: 1.000   std: 0.000
+
+result for class metal_nut --- mean: 0.867   std: 0.000
+result for class carpet --- mean: 0.839   std: 0.000
+result for class pill --- mean: 0.926   std: 0.000
+result for class capsule --- mean: 0.876   std: 0.000
+result for class screw --- mean: 0.713   std: 0.000
+result for class hazelnut --- mean: 0.846   std: 0.000
+result for class carpet --- mean: 0.343   std: 0.000
